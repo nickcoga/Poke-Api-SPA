@@ -4,8 +4,10 @@ import { colors } from "../../UI/ColorStyles";
 import { ICard } from "./InterfaceCard";
 import { Link } from "react-router-dom";
 import fondo from "../../assets/fondo.jpg";
+import { IProps } from "../Navbars/InterfaceNavbar";
+import whosthatpokemon from "../../assets/whosthatpokemon.png";
 
-export default function CardCharacter(): JSX.Element {
+const CardCharacter: React.FC<IProps> = ({ showPokemon }) => {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -27,12 +29,11 @@ export default function CardCharacter(): JSX.Element {
             <FontTop>
               <img
                 alt={c.name}
-                className="img"
+                className={`img ${showPokemon ? "show" : "hide"}`}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                   i + 1
                 }.png`}
               />
-
               <Pokename> {c.name}</Pokename>
             </FontTop>
           </Link>
@@ -40,7 +41,7 @@ export default function CardCharacter(): JSX.Element {
       ))}
     </UlStyles>
   );
-}
+};
 
 const UlStyles = styled.ul`
   display: flex;
@@ -68,16 +69,25 @@ const CardCharacterStyles = styled.div`
     color: ${colors.White};
     text-decoration: none;
   }
+
+  .show {
+    -webkit-filter: brightness(100%);
+  }
+
+  .hide {
+    -webkit-filter: brightness(0%);
+  }
 `;
 
 const FontTop = styled.div`
   width: 300px;
   height: 180px;
   border-radius: 12px 12px 0px 0px;
-  background: ${colors.Cream};
+  background: url(${whosthatpokemon});
+  background-repeat: no-repeat;
+  background-size: 110%;
   .img {
     width: 60%;
-    filter: brightness(0%);
   }
 `;
 
@@ -87,3 +97,5 @@ const Pokename = styled.h1`
   line-height: 28px;
   padding: 16px 10px;
 `;
+
+export default CardCharacter;

@@ -3,8 +3,13 @@ import { colors } from "../../UI/ColorStyles";
 import Logo from "../../assets/logo.png";
 import Profesor from "../../assets/profesor.png";
 import { Link } from "react-router-dom";
+import { IProps } from "./InterfaceNavbar";
 
-export default function NavbarLanding() {
+const NavbarLanding: React.FC<IProps> = ({ showPokemon, setShowPokemon }) => {
+  const handleChange = () => {
+    setShowPokemon(!showPokemon);
+  };
+
   return (
     <Navbar>
       <Container>
@@ -15,8 +20,7 @@ export default function NavbarLanding() {
         </Link>
         <Content>
           <label className="toogle">
-            <input type="checkbox" />
-            este es mi toogle
+            <input type="checkbox" onChange={handleChange} />
           </label>
 
           <img className="img2" src={Profesor} alt="profesor" />
@@ -24,7 +28,7 @@ export default function NavbarLanding() {
       </Container>
     </Navbar>
   );
-}
+};
 
 const Navbar = styled.ul`
   display: flex;
@@ -54,4 +58,9 @@ const Content = styled.div`
   .img2 {
     width: 100px;
   }
+  .toogle {
+    color: white;
+  }
 `;
+
+export default NavbarLanding;
