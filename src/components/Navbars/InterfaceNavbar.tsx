@@ -1,4 +1,5 @@
-interface Itoogle {
-  type: boolean;
+interface IProps {
+  showPokemon?: boolean;
+  setShowPokemon?: any;
 }
-export type { Itoogle };
+export type { IProps };
